@@ -1,0 +1,20 @@
+debug(f'{params_kw=}')
+prompt = params_kw.prompt
+try:
+	b64imgs = await hd_image.generate(prompt, num_inference_steps=20)
+	d = {
+		'status':'ok',
+		"data":[
+			{
+				"image":b64imgs
+			}
+		]
+	}
+	debug(f'return data {d=}')
+	return d
+except Exceoption as e:
+	exception(f'{e=}, {format_exc()}')
+	return {
+		'status':'error',
+		'message':'server error'
+	}
